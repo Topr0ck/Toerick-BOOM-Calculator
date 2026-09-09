@@ -18,8 +18,10 @@
       --charcoal: #94a3b8;
       --gp: #f97316;
       --lgf: #ef4444;
-      --metal: #38bdf8;
-      --stone: #a855f7;
+      --scrap: #38bdf8;
+      --hqm: #a855f7;
+      --cloth: #10b981;
+      --metal: #60a5fa;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -36,7 +38,7 @@
       min-height: 100vh;
     }
 
-    .wrapper { max-width: 1180px; margin: 0 auto; }
+    .wrapper { max-width: 1200px; margin: 0 auto; }
 
     header {
       display: flex;
@@ -64,15 +66,16 @@
     /* Navigation Tabs */
     .tab-bar {
       display: flex;
-      gap: 12px;
+      gap: 8px;
       margin-bottom: 24px;
+      flex-wrap: wrap;
     }
 
     .tab-btn {
       background: var(--card-bg);
       border: 1px solid var(--panel-border);
       color: var(--text-muted);
-      padding: 12px 20px;
+      padding: 12px 18px;
       font-family: 'Chakra Petch', sans-serif;
       font-size: 14px;
       font-weight: 700;
@@ -160,16 +163,20 @@
     .res-box.charcoal::before { background: var(--charcoal); }
     .res-box.gp::before { background: var(--gp); }
     .res-box.lgf::before { background: var(--lgf); }
+    .res-box.scrap::before { background: var(--scrap); }
+    .res-box.hqm::before { background: var(--hqm); }
+    .res-box.cloth::before { background: var(--cloth); }
     .res-box.metal::before { background: var(--metal); }
-    .res-box.stone::before { background: var(--stone); }
 
     .res-box .val { font-family: 'JetBrains Mono', monospace; font-size: 24px; font-weight: 700; margin-top: 6px; }
     .res-box.sulfur .val { color: var(--sulfur); }
     .res-box.charcoal .val { color: var(--charcoal); }
     .res-box.gp .val { color: var(--gp); }
     .res-box.lgf .val { color: var(--lgf); }
+    .res-box.scrap .val { color: var(--scrap); }
+    .res-box.hqm .val { color: var(--hqm); }
+    .res-box.cloth .val { color: var(--cloth); }
     .res-box.metal .val { color: var(--metal); }
-    .res-box.stone .val { color: var(--stone); }
 
     /* Queue & Lists */
     .queue-list { list-style: none; margin-bottom: 20px; }
@@ -184,11 +191,151 @@
     .pill { background: #08090b; border: 1px solid var(--panel-border); padding: 8px 14px; font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #fff; }
     .pill strong { color: var(--rust-orange); margin-right: 4px; }
 
-    /* Node Table Grid */
+    /* Tables */
     .node-table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 14px; }
     .node-table th, .node-table td { padding: 12px; text-align: left; border-bottom: 1px solid var(--panel-border); }
     .node-table th { font-family: 'Chakra Petch', sans-serif; color: var(--text-muted); text-transform: uppercase; font-size: 12px; }
     .node-table tr:hover { background: rgba(255,255,255,0.02); }
+
+    /* Recycler Component Grid */
+    .recycler-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 16px;
+    }
+
+    .comp-card {
+      background: #08090b;
+      border: 1px solid var(--panel-border);
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: border-color 0.2s;
+    }
+
+    .comp-card:hover { border-color: rgba(255, 68, 0, 0.5); }
+
+    .comp-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .comp-icon { font-size: 24px; }
+    .comp-name { font-family: 'Chakra Petch', sans-serif; font-weight: 700; font-size: 15px; color: #fff; }
+    .comp-yield { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+
+    .comp-ctrls {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .btn-qty {
+      background: var(--card-bg);
+      border: 1px solid var(--panel-border);
+      color: #fff;
+      width: 36px;
+      height: 36px;
+      font-weight: 700;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .btn-qty:hover { border-color: var(--rust-orange); color: var(--rust-orange); }
+
+    /* Tech Tree Styles */
+    .wb-selector {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .wb-btn {
+      flex: 1;
+      background: #08090b;
+      border: 1px solid var(--panel-border);
+      color: var(--text-muted);
+      padding: 14px;
+      font-family: 'Chakra Petch', sans-serif;
+      font-weight: 700;
+      cursor: pointer;
+      text-align: center;
+      text-transform: uppercase;
+      font-size: 14px;
+    }
+
+    .wb-btn.active {
+      border-color: var(--rust-orange);
+      color: #fff;
+      background: rgba(255, 68, 0, 0.1);
+    }
+
+    .tree-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    .tree-node {
+      background: #08090b;
+      border: 1px solid var(--panel-border);
+      padding: 16px;
+      cursor: pointer;
+      position: relative;
+      transition: all 0.2s;
+    }
+
+    .tree-node:hover { border-color: var(--text-muted); }
+    .tree-node.selected {
+      border-color: var(--rust-orange);
+      background: rgba(255, 68, 0, 0.08);
+      box-shadow: 0 0 15px rgba(255, 68, 0, 0.15);
+    }
+
+    .tree-node .node-cat {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--rust-orange);
+      font-weight: 700;
+    }
+
+    .tree-node .node-title {
+      font-family: 'Chakra Petch', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+      margin: 6px 0;
+    }
+
+    .tree-node .node-cost {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      color: var(--scrap);
+    }
+
+    .tree-node .req-tag {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 8px;
+      border-top: 1px dashed var(--panel-border);
+      padding-top: 6px;
+    }
+
+    .badge-selected {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: var(--rust-orange);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 6px;
+      text-transform: uppercase;
+    }
   </style>
 </head>
 <body>
@@ -201,8 +348,10 @@
     </header>
 
     <div class="tab-bar">
-      <button class="tab-btn active" onclick="switchTab('raidTab')">💥 Raid Calculator</button>
-      <button class="tab-btn" onclick="switchTab('nodeTab')">⛏️ Node & Tool Yields</button>
+      <button class="tab-btn active" onclick="switchTab('raidTab', this)">💥 Raid Calculator</button>
+      <button class="tab-btn" onclick="switchTab('nodeTab', this)">⛏️ Node & Tool Yields</button>
+      <button class="tab-btn" onclick="switchTab('recyclerTab', this)">♻️ Recycler Calculator</button>
+      <button class="tab-btn" onclick="switchTab('techTreeTab', this)">🔬 Interactive Tech Tree</button>
     </div>
 
     <!-- TAB 1: RAID CALCULATOR -->
@@ -310,8 +459,7 @@
               <tr>
                 <th>Tool</th>
                 <th>Harvest Efficiency</th>
-                <th>Primary Yield</th>
-                <th>Bonus Yield</th>
+                <th>Total Yield</th>
               </tr>
             </thead>
             <tbody id="nodeYieldTableBody">
@@ -322,20 +470,72 @@
       </div>
     </div>
 
+    <!-- TAB 3: RECYCLER CALCULATOR -->
+    <div id="recyclerTab" class="tab-content">
+      <div class="resource-row">
+        <div class="res-box scrap"><label>Total Scrap</label><div class="val" id="recScrap">0</div></div>
+        <div class="res-box metal"><label>Metal Frags</label><div class="val" id="recFrags">0</div></div>
+        <div class="res-box hqm"><label>HQM</label><div class="val" id="recHQM">0</div></div>
+        <div class="res-box cloth"><label>Cloth</label><div class="val" id="recCloth">0</div></div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-title">
+          <span>Outpost / Safezone Recycler Items</span>
+          <button style="background:none; border:none; color:#ef4444; cursor:pointer; font-size:11px;" onclick="clearRecycler()">[ RESET ALL ]</button>
+        </div>
+
+        <div class="recycler-grid" id="recyclerGrid">
+          <!-- Dynamically Populated -->
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 4: INTERACTIVE TECH TREE -->
+    <div id="techTreeTab" class="tab-content">
+      <div class="wb-selector">
+        <button class="wb-btn active" onclick="switchWbTier('t1', this)">Workbench Tier 1</button>
+        <button class="wb-btn" onclick="switchWbTier('t2', this)">Workbench Tier 2</button>
+        <button class="wb-btn" onclick="switchWbTier('t3', this)">Workbench Tier 3</button>
+      </div>
+
+      <div class="resource-row">
+        <div class="res-box scrap"><label>Total Scrap Required</label><div class="val" id="treeTotalScrap">0</div></div>
+        <div class="res-box hqm"><label>Items Selected</label><div class="val" id="treeItemCount">0</div></div>
+        <div class="res-box metal"><label>Workbench Craft Cost</label><div class="val" id="treeWbCost" style="font-size:14px; margin-top:10px;">-</div></div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-title">
+          <span id="wbTreeTitle">Workbench Tier 1 Engineering Path</span>
+          <button style="background:none; border:none; color:#ef4444; cursor:pointer; font-size:11px;" onclick="clearTechSelection()">[ CLEAR SELECTIONS ]</button>
+        </div>
+
+        <div class="tree-grid" id="treeGrid">
+          <!-- Dynamically Populated -->
+        </div>
+      </div>
+    </div>
+
   </div>
 
   <script>
-    // Tab Switching
-    function switchTab(tabId) {
-      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+    // Tab Switching Logic
+    function switchTab(tabId, btn) {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
       document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
       
-      event.target.classList.add('active');
+      btn.classList.add('active');
       document.getElementById(tabId).classList.add('active');
+
       if(tabId === 'nodeTab') updateNodeYields();
+      if(tabId === 'recyclerTab') renderRecycler();
+      if(tabId === 'techTreeTab') renderTechTree();
     }
 
-    // RAID CALCULATOR LOGIC
+    // ==========================================
+    // 1. RAID CALCULATOR
+    // ==========================================
     const EXPLOSIVES = {
       c4: { name: 'C4', sulfur: 2200, charcoal: 3000, lgf: 200 },
       rocket: { name: 'Rocket', sulfur: 1400, charcoal: 1950, lgf: 30 },
@@ -454,7 +654,9 @@
       explosiveBadgesEl.innerHTML = badgeList || `<span class="pill">None</span>`;
     }
 
-    // NODE FARMING CALCULATOR LOGIC
+    // ==========================================
+    // 2. NODE FARMING LOGIC
+    // ==========================================
     const TOOLS = [
       { name: 'Rock', eff: 0.66 },
       { name: 'Bone Pickaxe', eff: 0.75 },
@@ -465,9 +667,9 @@
     ];
 
     const NODE_DATA = {
-      sulfur: { name: 'Sulfur Ore Node', primary: 'Sulfur Ore', basePrimary: 300, bonus: 'Stone', baseBonus: 200 },
-      metal: { name: 'Metal Ore Node', primary: 'Metal Ore', basePrimary: 600, bonus: 'HQM / Stone', baseBonus: '2 HQM + 200 Stone' },
-      stone: { name: 'Stone Node', primary: 'Stone', basePrimary: 1000, bonus: 'None', baseBonus: '-' }
+      sulfur: { name: 'Sulfur Ore Node', primary: 'Sulfur Ore', basePrimary: 300 },
+      metal: { name: 'Metal Ore Node', primary: 'Metal Ore', basePrimary: 600 },
+      stone: { name: 'Stone Node', primary: 'Stone', basePrimary: 1000 }
     };
 
     function updateNodeYields() {
@@ -480,23 +682,238 @@
 
       TOOLS.forEach(tool => {
         const primaryYield = Math.floor(node.basePrimary * tool.eff * count);
-        let bonusText = node.baseBonus;
-
-        if (typeof node.baseBonus === 'number') {
-          bonusText = `${Math.floor(node.baseBonus * tool.eff * count)} ${node.bonus}`;
-        } else if (node.baseBonus !== '-') {
-          bonusText = `${count * 2} HQM + ${Math.floor(200 * tool.eff * count)} Stone`;
-        }
 
         const tr = document.createElement('tr');
         tr.innerHTML = `
           <td><strong>${tool.name}</strong></td>
           <td>${Math.floor(tool.eff * 100)}%</td>
           <td style="color:var(--rust-orange); font-weight:bold;">${primaryYield.toLocaleString()} ${node.primary}</td>
-          <td>${bonusText}</td>
         `;
         tbody.appendChild(tr);
       });
+    }
+
+    // ==========================================
+    // 3. RECYCLER CALCULATOR LOGIC
+    // ==========================================
+    const RECYCLER_ITEMS = [
+      { id: 'techtrash', name: 'Tech Trash', scrap: 20, hqm: 1, frags: 0, cloth: 0, icon: '📟' },
+      { id: 'gears', name: 'Gears', scrap: 10, hqm: 0, frags: 13, cloth: 0, icon: '⚙️' },
+      { id: 'pipe', name: 'Metal Pipe', scrap: 5, hqm: 2, frags: 0, cloth: 0, icon: '🥢' },
+      { id: 'spring', name: 'Metal Spring', scrap: 10, hqm: 1, frags: 0, cloth: 0, icon: '🌀' },
+      { id: 'riflebody', name: 'Rifle Body', scrap: 25, hqm: 2, frags: 0, cloth: 0, icon: '🔫' },
+      { id: 'smgbody', name: 'SMG Body', scrap: 15, hqm: 2, frags: 0, cloth: 0, icon: '🔫' },
+      { id: 'semibody', name: 'Semi Body', scrap: 15, hqm: 2, frags: 75, cloth: 0, icon: '🔫' },
+      { id: 'roadsigns', name: 'Road Signs', scrap: 5, hqm: 1, frags: 0, cloth: 0, icon: '🛡️' },
+      { id: 'sheetmetal', name: 'Sheet Metal', scrap: 8, hqm: 1, frags: 100, cloth: 0, icon: '📦' },
+      { id: 'tarp', name: 'Tarp', scrap: 0, hqm: 0, frags: 0, cloth: 50, icon: '⛺' },
+      { id: 'rope', name: 'Rope', scrap: 0, hqm: 0, frags: 0, cloth: 15, icon: '🪢' },
+      { id: 'sewingkit', name: 'Sewing Kit', scrap: 0, hqm: 0, frags: 0, cloth: 60, icon: '🧵' },
+      { id: 'blade', name: 'Metal Blade', scrap: 2, hqm: 0, frags: 15, cloth: 0, icon: '🔪' },
+      { id: 'fuse', name: 'Electric Fuse', scrap: 20, hqm: 0, frags: 0, cloth: 0, icon: '🔌' },
+      { id: 'cctv', name: 'CCTV Camera', scrap: 40, hqm: 4, frags: 0, cloth: 0, icon: '📷' },
+      { id: 'laptop', name: 'Targeting Computer', scrap: 60, hqm: 4, frags: 50, cloth: 0, icon: '💻' }
+    ];
+
+    let recyclerState = {};
+
+    function renderRecycler() {
+      const grid = document.getElementById('recyclerGrid');
+      grid.innerHTML = '';
+
+      RECYCLER_ITEMS.forEach(item => {
+        const qty = recyclerState[item.id] || 0;
+        const yieldText = [
+          item.scrap ? `${item.scrap} Scrap` : '',
+          item.hqm ? `${item.hqm} HQM` : '',
+          item.frags ? `${item.frags} Frags` : '',
+          item.cloth ? `${item.cloth} Cloth` : ''
+        ].filter(Boolean).join(' | ');
+
+        const card = document.createElement('div');
+        card.className = 'comp-card';
+        card.innerHTML = `
+          <div class="comp-header">
+            <div class="comp-icon">${item.icon}</div>
+            <div>
+              <div class="comp-name">${item.name}</div>
+              <div class="comp-yield">Yield: ${yieldText}</div>
+            </div>
+          </div>
+          <div class="comp-ctrls">
+            <button class="btn-qty" onclick="adjustRecQty('${item.id}', -10)">-10</button>
+            <button class="btn-qty" onclick="adjustRecQty('${item.id}', -1)">-1</button>
+            <input type="number" value="${qty}" min="0" oninput="setRecQty('${item.id}', this.value)" style="text-align:center;">
+            <button class="btn-qty" onclick="adjustRecQty('${item.id}', 1)">+1</button>
+            <button class="btn-qty" onclick="adjustRecQty('${item.id}', 10)">+10</button>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+
+      calculateRecyclerTotals();
+    }
+
+    function adjustRecQty(id, delta) {
+      recyclerState[id] = Math.max(0, (recyclerState[id] || 0) + delta);
+      renderRecycler();
+    }
+
+    function setRecQty(id, val) {
+      recyclerState[id] = Math.max(0, parseInt(val) || 0);
+      calculateRecyclerTotals();
+    }
+
+    function clearRecycler() {
+      recyclerState = {};
+      renderRecycler();
+    }
+
+    function calculateRecyclerTotals() {
+      let totals = { scrap: 0, frags: 0, hqm: 0, cloth: 0 };
+
+      RECYCLER_ITEMS.forEach(item => {
+        const qty = recyclerState[item.id] || 0;
+        totals.scrap += item.scrap * qty;
+        totals.frags += item.frags * qty;
+        totals.hqm += item.hqm * qty;
+        totals.cloth += item.cloth * qty;
+      });
+
+      document.getElementById('recScrap').innerText = totals.scrap.toLocaleString();
+      document.getElementById('recFrags').innerText = totals.frags.toLocaleString();
+      document.getElementById('recHQM').innerText = totals.hqm.toLocaleString();
+      document.getElementById('recCloth').innerText = totals.cloth.toLocaleString();
+    }
+
+    // ==========================================
+    // 4. TECH TREE CALCULATOR LOGIC
+    // ==========================================
+    const TECH_TREES = {
+      t1: {
+        title: "Tier 1 Workbench (Engineering & Starter)",
+        wbCost: "50 Scrap + 500 Wood + 100 Metal",
+        items: [
+          { id: 't1_ladder', name: 'Wooden Ladder', scrap: 125, cat: 'Utility', req: [] },
+          { id: 't1_revolver', name: 'Revolver', scrap: 75, cat: 'Weapons', req: [] },
+          { id: 't1_ammo', name: 'Pistol Bullet', scrap: 75, cat: 'Ammo', req: ['t1_revolver'] },
+          { id: 't1_pipe', name: 'Waterpipe Shotgun', scrap: 75, cat: 'Weapons', req: [] },
+          { id: 't1_eoka', name: 'Eoka Pistol', scrap: 20, cat: 'Weapons', req: [] },
+          { id: 't1_firearrow', name: 'Fire Arrow', scrap: 75, cat: 'Ammo', req: [] },
+          { id: 't1_stash', name: 'Small Stash', scrap: 20, cat: 'Storage', req: [] },
+          { id: 't1_mixing', name: 'Mixing Table', scrap: 75, cat: 'Utility', req: [] },
+          { id: 't1_barricade', name: 'Wooden Barricade', scrap: 20, cat: 'Defense', req: [] }
+        ]
+      },
+      t2: {
+        title: "Tier 2 Workbench (Main Progression)",
+        wbCost: "500 Scrap + 20 HQM + 500 Metal",
+        items: [
+          { id: 't2_syringe', name: 'Medical Syringe', scrap: 75, cat: 'Medical', req: [] },
+          { id: 't2_medkit', name: 'Large Medkit', scrap: 125, cat: 'Medical', req: ['t2_syringe'] },
+          { id: 't2_garagedoor', name: 'Garage Door', scrap: 75, cat: 'Building', req: [] },
+          { id: 't2_tommy', name: 'Thompson SMG', scrap: 125, cat: 'Weapons', req: [] },
+          { id: 't2_custom', name: 'Custom SMG', scrap: 125, cat: 'Weapons', req: [] },
+          { id: 't2_sar', name: 'Semi-Automatic Rifle', scrap: 125, cat: 'Weapons', req: [] },
+          { id: 't2_556', name: '5.56 Ammo', scrap: 125, cat: 'Ammo', req: ['t2_sar'] },
+          { id: 't2_beancan', name: 'Beancan Grenade', scrap: 75, cat: 'Explosives', req: [] },
+          { id: 't2_satchel', name: 'Satchel Charge', scrap: 125, cat: 'Explosives', req: ['t2_beancan'] },
+          { id: 't2_expammo', name: 'Explosive Ammo', scrap: 125, cat: 'Explosives', req: ['t2_556'] }
+        ]
+      },
+      t3: {
+        title: "Tier 3 Workbench (Endgame)",
+        wbCost: "1,250 Scrap + 100 HQM + 1,000 Metal",
+        items: [
+          { id: 't3_ak', name: 'Assault Rifle (AK-47)', scrap: 500, cat: 'Weapons', req: [] },
+          { id: 't3_bolt', name: 'Bolt Action Rifle', scrap: 500, cat: 'Weapons', req: [] },
+          { id: 't3_facemask', name: 'Metal Facemask', scrap: 500, cat: 'Armor', req: [] },
+          { id: 't3_chestplate', name: 'Metal Chestplate', scrap: 500, cat: 'Armor', req: ['t3_facemask'] },
+          { id: 't3_launcher', name: 'Rocket Launcher', scrap: 500, cat: 'Explosives', req: [] },
+          { id: 't3_rocket', name: 'Rocket', scrap: 500, cat: 'Explosives', req: ['t3_launcher'] },
+          { id: 't3_c4', name: 'Timed Explosive Charge (C4)', scrap: 500, cat: 'Explosives', req: ['t3_rocket'] },
+          { id: 't3_hvrocket', name: 'HV Rocket', scrap: 500, cat: 'Explosives', req: ['t3_launcher'] }
+        ]
+      }
+    };
+
+    let activeTier = 't1';
+    let selectedTechNodes = new Set();
+
+    function switchWbTier(tier, btn) {
+      document.querySelectorAll('.wb-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeTier = tier;
+      renderTechTree();
+    }
+
+    function toggleTechNode(itemId) {
+      if (selectedTechNodes.has(itemId)) {
+        selectedTechNodes.delete(itemId);
+      } else {
+        selectedTechNodes.add(itemId);
+        // Auto-select prerequisites
+        autoSelectReqs(itemId);
+      }
+      renderTechTree();
+    }
+
+    function autoSelectReqs(itemId) {
+      const tierData = TECH_TREES[activeTier];
+      const item = tierData.items.find(i => i.id === itemId);
+      if (item && item.req) {
+        item.req.forEach(reqId => {
+          selectedTechNodes.add(reqId);
+          autoSelectReqs(reqId);
+        });
+      }
+    }
+
+    function clearTechSelection() {
+      selectedTechNodes.clear();
+      renderTechTree();
+    }
+
+    function renderTechTree() {
+      const tierData = TECH_TREES[activeTier];
+      document.getElementById('wbTreeTitle').innerText = tierData.title;
+      document.getElementById('treeWbCost').innerText = tierData.wbCost;
+
+      const grid = document.getElementById('treeGrid');
+      grid.innerHTML = '';
+
+      let totalScrap = 0;
+      let count = 0;
+
+      tierData.items.forEach(item => {
+        const isSelected = selectedTechNodes.has(item.id);
+        if (isSelected) {
+          totalScrap += item.scrap;
+          count++;
+        }
+
+        const node = document.createElement('div');
+        node.className = `tree-node ${isSelected ? 'selected' : ''}`;
+        node.onclick = () => toggleTechNode(item.id);
+
+        const reqNames = item.req.map(rId => {
+          const reqItem = tierData.items.find(i => i.id === rId);
+          return reqItem ? reqItem.name : rId;
+        }).join(', ');
+
+        node.innerHTML = `
+          ${isSelected ? '<span class="badge-selected">Selected</span>' : ''}
+          <div class="node-cat">${item.cat}</div>
+          <div class="node-title">${item.name}</div>
+          <div class="node-cost">${item.scrap} Scrap</div>
+          ${reqNames ? `<div class="req-tag">Requires: ${reqNames}</div>` : ''}
+        `;
+
+        grid.appendChild(node);
+      });
+
+      document.getElementById('treeTotalScrap').innerText = totalScrap.toLocaleString();
+      document.getElementById('treeItemCount').innerText = count.toLocaleString();
     }
   </script>
 </body>
