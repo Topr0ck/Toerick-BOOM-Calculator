@@ -363,6 +363,88 @@
     }
 
     .btn-reset-tree:hover { border-color: #ef4444; color: #ef4444; }
+
+    /* WIPE TRACKER STYLING */
+    .hero-timer-card {
+      background: radial-gradient(circle at top right, rgba(255, 68, 0, 0.15), rgba(17, 19, 24, 0.95));
+      border: 1px solid var(--rust-orange);
+      padding: 28px;
+      text-align: center;
+      margin-bottom: 20px;
+      box-shadow: 0 0 20px rgba(255, 68, 0, 0.1);
+    }
+
+    .hero-timer-title {
+      font-family: 'Chakra Petch', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--rust-orange);
+      margin-bottom: 6px;
+    }
+
+    .hero-timer-sub {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .clock-display {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 38px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 3px;
+      text-shadow: 0 0 10px var(--rust-glow);
+    }
+
+    .server-wipe-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .server-card {
+      background: #08090b;
+      border: 1px solid var(--panel-border);
+      padding: 18px;
+      position: relative;
+    }
+
+    .server-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 12px;
+    }
+
+    .server-name {
+      font-family: 'Chakra Petch', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .badge-wipe-type {
+      background: var(--card-bg);
+      border: 1px solid var(--panel-border);
+      color: var(--rust-orange);
+      font-size: 10px;
+      font-family: 'Chakra Petch', sans-serif;
+      padding: 3px 8px;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .server-timer {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--scrap);
+      margin-top: 8px;
+    }
   </style>
 </head>
 <body>
@@ -379,6 +461,7 @@
       <button class="tab-btn" onclick="switchTab('nodeTab', this)">⛏️ Node & Tool Yields</button>
       <button class="tab-btn" onclick="switchTab('recyclerTab', this)">♻️ Recycler Calculator</button>
       <button class="tab-btn" onclick="switchTab('techTreeTab', this)">🔬 Interactive Tech Tree</button>
+      <button class="tab-btn" onclick="switchTab('wipeTab', this)">📅 Wipe Tracker</button>
     </div>
 
     <!-- TAB 1: RAID CALCULATOR -->
@@ -524,9 +607,9 @@
         
         <div class="tree-canvas-panel">
           <div class="wb-tabs-bar">
-            <button class="wb-tab active" onclick="switchWbTier('t1', this)">Workbench Tier 1</button>
-            <button class="wb-tab" onclick="switchWbTier('t2', this)">Workbench Tier 2</button>
-            <button class="wb-tab" onclick="switchWbTier('t3', this)">Workbench Tier 3</button>
+            <button class="wb-tab active" onclick="switchWbTier('t1', this)">Tier 1 Tech</button>
+            <button class="wb-tab" onclick="switchWbTier('t2', this)">Tier 2 Tech</button>
+            <button class="wb-tab" onclick="switchWbTier('t3', this)">Tier 3 Tech</button>
           </div>
 
           <div class="tree-viewport" id="treeViewport">
@@ -563,6 +646,52 @@
       </div>
     </div>
 
+    <!-- TAB 5: WIPE TRACKER SYSTEM -->
+    <div id="wipeTab" class="tab-content">
+      <div class="hero-timer-card">
+        <div class="hero-timer-title">⚡ OFFICIAL FACEPUNCH FORCE WIPE ⚡</div>
+        <div class="hero-timer-sub">Occurs every 1st Thursday of the month at 19:00 UTC (Global Server Wipe & BP Reset)</div>
+        <div class="clock-display" id="forceWipeClock">00d 00h 00m 00s</div>
+      </div>
+
+      <div class="grid">
+        <div class="panel">
+          <div class="panel-title">Track Custom Server Wipe</div>
+
+          <div class="form-group">
+            <label for="srvName">Server Name</label>
+            <input type="text" id="srvName" placeholder="e.g. Rustafied US Main">
+          </div>
+
+          <div class="form-group">
+            <label for="srvWipeDate">Wipe Date & Time</label>
+            <input type="datetime-local" id="srvWipeDate">
+          </div>
+
+          <div class="form-group">
+            <label for="srvType">Wipe Type</label>
+            <select id="srvType">
+              <option value="Full Wipe (BP + Map)">Full Wipe (BP + Map)</option>
+              <option value="Map Wipe Only">Map Wipe Only</option>
+            </select>
+          </div>
+
+          <button class="btn-action" onclick="addCustomServer()">+ Add Server Tracker</button>
+        </div>
+
+        <div class="panel">
+          <div class="panel-title">
+            <span>Tracked Server Schedules</span>
+            <button style="background:none; border:none; color:#ef4444; cursor:pointer; font-size:11px;" onclick="clearTrackedServers()">[ RESET SERVERS ]</button>
+          </div>
+
+          <div class="server-wipe-grid" id="serverWipeGrid">
+            <!-- Dynamically Populated -->
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 
   <script>
@@ -577,6 +706,7 @@
       if(tabId === 'nodeTab') updateNodeYields();
       if(tabId === 'recyclerTab') renderRecycler();
       if(tabId === 'techTreeTab') renderVisualTree();
+      if(tabId === 'wipeTab') renderServerTrackers();
     }
 
     // ==========================================
@@ -833,18 +963,15 @@
     }
 
     // ==========================================
-    // 4. VISUAL GRAPH TECH TREE LOGIC
+    // 4. VISUAL GRAPH TECH TREE LOGIC (WORKBENCHES REMOVED)
     // ==========================================
     const VISUAL_TREES = {
       t1: {
         levels: [
           [
-            { id: 't1_root', name: 'Building Plan', icon: '📝', cost: 0, desc: 'Foundation requirement for Tier 1 crafting tree.' }
-          ],
-          [
-            { id: 't1_wooddoor', name: 'Wooden Door', icon: '🚪', cost: 20, parent: 't1_root', desc: 'Basic wooden entry door.' },
-            { id: 't1_revolver', name: 'Revolver', icon: '🔫', cost: 75, parent: 't1_root', desc: 'A basic 8-shot reliable handgun.' },
-            { id: 't1_eoka', name: 'Eoka Pistol', icon: '💥', cost: 20, parent: 't1_root', desc: 'Flintlock pistol. Highly unreliable.' }
+            { id: 't1_wooddoor', name: 'Wooden Door', icon: '🚪', cost: 20, desc: 'Basic wooden entry door.' },
+            { id: 't1_revolver', name: 'Revolver', icon: '🔫', cost: 75, desc: 'A basic 8-shot reliable handgun.' },
+            { id: 't1_eoka', name: 'Eoka Pistol', icon: '💥', cost: 20, desc: 'Flintlock pistol. Highly unreliable.' }
           ],
           [
             { id: 't1_keylock', name: 'Key Lock', icon: '🔒', cost: 20, parent: 't1_wooddoor', desc: 'Basic door lock requiring no key for the owner.' },
@@ -860,12 +987,9 @@
       t2: {
         levels: [
           [
-            { id: 't2_root', name: 'Workbench T2', icon: '⚙️', cost: 0, desc: 'Tier 2 Engineering Hub.' }
-          ],
-          [
-            { id: 't2_garage', name: 'Garage Door', icon: '🚪', cost: 75, parent: 't2_root', desc: 'Roll-up metal garage door.' },
-            { id: 't2_tommy', name: 'Thompson SMG', icon: '🔫', cost: 125, parent: 't2_root', desc: 'Rapid fire submachine gun.' },
-            { id: 't2_beancan', name: 'Beancan Grenade', icon: '🥫', cost: 75, parent: 't2_root', desc: 'An unreliable explosive grenade.' }
+            { id: 't2_garage', name: 'Garage Door', icon: '🚪', cost: 75, desc: 'Roll-up metal garage door.' },
+            { id: 't2_tommy', name: 'Thompson SMG', icon: '🔫', cost: 125, desc: 'Rapid fire submachine gun.' },
+            { id: 't2_beancan', name: 'Beancan Grenade', icon: '🥫', cost: 75, desc: 'An unreliable explosive grenade.' }
           ],
           [
             { id: 't2_sar', name: 'Semi-Auto Rifle', icon: '🎯', cost: 125, parent: 't2_tommy', desc: 'Mid-range rifle firing 5.56 rounds.' },
@@ -882,12 +1006,9 @@
       t3: {
         levels: [
           [
-            { id: 't3_root', name: 'Workbench T3', icon: '🔬', cost: 0, desc: 'High Tech Engineering Base.' }
-          ],
-          [
-            { id: 't3_ak', name: 'Assault Rifle (AK)', icon: '🔫', cost: 500, parent: 't3_root', desc: 'High damage iconic automatic rifle.' },
-            { id: 't3_facemask', name: 'Metal Facemask', icon: '🪖', cost: 500, parent: 't3_root', desc: 'Heavy armored head protection.' },
-            { id: 't3_launcher', name: 'Rocket Launcher', icon: '🚀', cost: 500, parent: 't3_root', desc: 'Shoulder-fired rocket launcher.' }
+            { id: 't3_ak', name: 'Assault Rifle (AK)', icon: '🔫', cost: 500, desc: 'High damage iconic automatic rifle.' },
+            { id: 't3_facemask', name: 'Metal Facemask', icon: '🪖', cost: 500, desc: 'Heavy armored head protection.' },
+            { id: 't3_launcher', name: 'Rocket Launcher', icon: '🚀', cost: 500, desc: 'Shoulder-fired rocket launcher.' }
           ],
           [
             { id: 't3_bolt', name: 'Bolt Action Rifle', icon: '🔭', cost: 500, parent: 't3_ak', desc: 'Long range precision sniper rifle.' },
@@ -938,7 +1059,6 @@
         container.appendChild(row);
       });
 
-      // Allow DOM rendering time then draw SVGs and recalculate pathing
       setTimeout(() => {
         highlightActivePath();
         drawConnectors();
@@ -1013,6 +1133,8 @@
     function drawConnectors() {
       const svg = document.getElementById('svgConnectors');
       const viewport = document.getElementById('treeViewport');
+      if(!svg || !viewport) return;
+
       const vpRect = viewport.getBoundingClientRect();
 
       svg.setAttribute('width', viewport.scrollWidth);
@@ -1055,6 +1177,109 @@
     }
 
     window.addEventListener('resize', drawConnectors);
+
+    // ==========================================
+    // 5. WIPE TRACKER SYSTEM LOGIC
+    // ==========================================
+    let trackedServers = [
+      { id: 1, name: 'Rustafied Main', wipeDate: new Date(Date.now() + 86400000 * 3).toISOString(), type: 'Full Wipe (BP + Map)' },
+      { id: 2, name: 'Reddit US Monthly', wipeDate: new Date(Date.now() + 86400000 * 6).toISOString(), type: 'Map Wipe Only' }
+    ];
+
+    function getNextForceWipe() {
+      const now = new Date();
+      let year = now.getUTCFullYear();
+      let month = now.getUTCMonth();
+
+      function getFirstThursday(y, m) {
+        let d = new Date(Date.UTC(y, m, 1, 19, 0, 0));
+        while (d.getUTCDay() !== 4) { d.setUTCDate(d.getUTCDate() + 1); }
+        return d;
+      }
+
+      let forceWipe = getFirstThursday(year, month);
+      if (now >= forceWipe) {
+        forceWipe = getFirstThursday(year, month + 1);
+      }
+      return forceWipe;
+    }
+
+    function formatTimeRemaining(targetDate) {
+      const diff = new Date(targetDate) - new Date();
+      if (diff <= 0) return 'WIPING NOW';
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const mins = Math.floor((diff / 1000 / 60) % 60);
+      const secs = Math.floor((diff / 1000) % 60);
+
+      const pad = (n) => String(n).padStart(2, '0');
+      return `${pad(days)}d ${pad(hours)}h ${pad(mins)}m ${pad(secs)}s`;
+    }
+
+    function updateWipeClocks() {
+      const forceWipeTarget = getNextForceWipe();
+      const clockEl = document.getElementById('forceWipeClock');
+      if (clockEl) clockEl.innerText = formatTimeRemaining(forceWipeTarget);
+
+      trackedServers.forEach(srv => {
+        const el = document.getElementById(`srv-timer-${srv.id}`);
+        if (el) el.innerText = formatTimeRemaining(srv.wipeDate);
+      });
+    }
+
+    function addCustomServer() {
+      const name = document.getElementById('srvName').value.trim();
+      const dateVal = document.getElementById('srvWipeDate').value;
+      const type = document.getElementById('srvType').value;
+
+      if (!name || !dateVal) return alert('Please enter both a server name and wipe date/time.');
+
+      trackedServers.push({
+        id: Date.now(),
+        name: name,
+        wipeDate: new Date(dateVal).toISOString(),
+        type: type
+      });
+
+      document.getElementById('srvName').value = '';
+      document.getElementById('srvWipeDate').value = '';
+      renderServerTrackers();
+    }
+
+    function deleteServer(id) {
+      trackedServers = trackedServers.filter(s => s.id !== id);
+      renderServerTrackers();
+    }
+
+    function clearTrackedServers() {
+      trackedServers = [];
+      renderServerTrackers();
+    }
+
+    function renderServerTrackers() {
+      const grid = document.getElementById('serverWipeGrid');
+      grid.innerHTML = trackedServers.length === 0 ? `<div class="empty-state">// NO CUSTOM SERVERS TRACKED</div>` : '';
+
+      trackedServers.forEach(srv => {
+        const card = document.createElement('div');
+        card.className = 'server-card';
+        card.innerHTML = `
+          <div class="server-card-header">
+            <div>
+              <div class="server-name">${srv.name}</div>
+              <div class="badge-wipe-type" style="margin-top:6px;">${srv.type}</div>
+            </div>
+            <button class="btn-del" onclick="deleteServer(${srv.id})">✕</button>
+          </div>
+          <div class="server-timer" id="srv-timer-${srv.id}">${formatTimeRemaining(srv.wipeDate)}</div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    setInterval(updateWipeClocks, 1000);
+    updateWipeClocks();
   </script>
 </body>
 </html>
