@@ -11,7 +11,7 @@
       --card-bg: #111318;
       --panel-border: #232732;
       --rust-orange: #ff4400;
-      --rust-glow: rgba(255, 68, 0, 0.25);
+      --rust-glow: rgba(255, 68, 0, 0.3);
       --text-main: #f1f5f9;
       --text-muted: #64748b;
       --sulfur: #facc15;
@@ -34,11 +34,11 @@
       background-size: 24px 24px, 100% 100%;
       color: var(--text-main);
       font-family: 'Inter', sans-serif;
-      padding: 32px 16px;
+      padding: 24px 16px;
       min-height: 100vh;
     }
 
-    .wrapper { max-width: 1200px; margin: 0 auto; }
+    .wrapper { max-width: 1280px; margin: 0 auto; }
 
     header {
       display: flex;
@@ -49,12 +49,11 @@
       border: 1px solid var(--panel-border);
       border-left: 4px solid var(--rust-orange);
       margin-bottom: 20px;
-      box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
     }
 
     .brand h1 {
       font-family: 'Chakra Petch', sans-serif;
-      font-size: 28px;
+      font-size: 26px;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 1.5px;
@@ -67,7 +66,7 @@
     .tab-bar {
       display: flex;
       gap: 8px;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
       flex-wrap: wrap;
     }
 
@@ -77,7 +76,7 @@
       color: var(--text-muted);
       padding: 12px 18px;
       font-family: 'Chakra Petch', sans-serif;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 1px;
@@ -94,25 +93,25 @@
     .tab-content { display: none; }
     .tab-content.active { display: block; }
 
-    /* Layout Grids */
-    .grid { display: grid; grid-template-columns: 1fr; gap: 24px; }
-    @media (min-width: 900px) { .grid { grid-template-columns: 380px 1fr; } }
+    /* Grids & Panels */
+    .grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
+    @media (min-width: 900px) { .grid { grid-template-columns: 360px 1fr; } }
 
     .panel {
       background: var(--card-bg);
       border: 1px solid var(--panel-border);
-      padding: 24px;
+      padding: 20px;
       position: relative;
     }
 
     .panel-title {
       font-family: 'Chakra Petch', sans-serif;
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 1px;
       color: var(--text-muted);
-      margin-bottom: 20px;
+      margin-bottom: 16px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -120,7 +119,7 @@
       padding-bottom: 10px;
     }
 
-    .form-group { margin-bottom: 18px; }
+    .form-group { margin-bottom: 16px; }
     label { display: block; font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
 
     select, input {
@@ -128,13 +127,13 @@
       background: #08090b;
       border: 1px solid var(--panel-border);
       color: #fff;
-      padding: 12px 14px;
+      padding: 12px;
       font-family: 'Inter', sans-serif;
       font-size: 14px;
       outline: none;
     }
 
-    select:focus, input:focus { border-color: var(--rust-orange); box-shadow: 0 0 10px var(--rust-glow); }
+    select:focus, input:focus { border-color: var(--rust-orange); }
 
     .btn-action {
       width: 100%;
@@ -143,21 +142,20 @@
       border: none;
       padding: 14px;
       font-family: 'Chakra Petch', sans-serif;
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 1.5px;
       cursor: pointer;
-      margin-top: 8px;
     }
 
-    .btn-action:hover { background: #ff5511; box-shadow: 0 0 20px var(--rust-glow); }
+    .btn-action:hover { background: #ff5511; box-shadow: 0 0 15px var(--rust-glow); }
 
-    /* Resource Box Styling */
-    .resource-row { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 24px; }
+    /* Resource Box Row */
+    .resource-row { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 20px; }
     @media (min-width: 650px) { .resource-row { grid-template-columns: repeat(4, 1fr); } }
 
-    .res-box { background: #08090b; border: 1px solid var(--panel-border); padding: 16px; position: relative; }
+    .res-box { background: #08090b; border: 1px solid var(--panel-border); padding: 14px; position: relative; }
     .res-box::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px; }
     .res-box.sulfur::before { background: var(--sulfur); }
     .res-box.charcoal::before { background: var(--charcoal); }
@@ -168,7 +166,7 @@
     .res-box.cloth::before { background: var(--cloth); }
     .res-box.metal::before { background: var(--metal); }
 
-    .res-box .val { font-family: 'JetBrains Mono', monospace; font-size: 24px; font-weight: 700; margin-top: 6px; }
+    .res-box .val { font-family: 'JetBrains Mono', monospace; font-size: 22px; font-weight: 700; margin-top: 4px; }
     .res-box.sulfur .val { color: var(--sulfur); }
     .res-box.charcoal .val { color: var(--charcoal); }
     .res-box.gp .val { color: var(--gp); }
@@ -179,163 +177,192 @@
     .res-box.metal .val { color: var(--metal); }
 
     /* Queue & Lists */
-    .queue-list { list-style: none; margin-bottom: 20px; }
-    .queue-item { display: flex; justify-content: space-between; align-items: center; background: #08090b; border: 1px solid var(--panel-border); border-left: 3px solid var(--rust-orange); padding: 14px 16px; margin-bottom: 10px; }
-    .queue-item-info strong { font-family: 'Chakra Petch', sans-serif; font-size: 16px; color: #fff; }
-    .queue-item-info span { display: block; font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+    .queue-list { list-style: none; margin-bottom: 16px; }
+    .queue-item { display: flex; justify-content: space-between; align-items: center; background: #08090b; border: 1px solid var(--panel-border); border-left: 3px solid var(--rust-orange); padding: 12px 14px; margin-bottom: 8px; }
+    .queue-item-info strong { font-family: 'Chakra Petch', sans-serif; font-size: 15px; color: #fff; }
+    .queue-item-info span { display: block; font-size: 11px; color: var(--text-muted); margin-top: 2px; }
 
-    .btn-del { background: transparent; border: none; color: #ef4444; cursor: pointer; font-size: 18px; }
-    .empty-state { text-align: center; color: var(--text-muted); font-size: 13px; padding: 32px 0; font-family: 'JetBrains Mono', monospace; }
+    .btn-del { background: transparent; border: none; color: #ef4444; cursor: pointer; font-size: 16px; }
+    .empty-state { text-align: center; color: var(--text-muted); font-size: 13px; padding: 24px 0; font-family: 'JetBrains Mono', monospace; }
 
-    .exp-pills { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 12px; }
-    .pill { background: #08090b; border: 1px solid var(--panel-border); padding: 8px 14px; font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #fff; }
+    .exp-pills { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+    .pill { background: #08090b; border: 1px solid var(--panel-border); padding: 6px 12px; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #fff; }
     .pill strong { color: var(--rust-orange); margin-right: 4px; }
 
     /* Tables */
-    .node-table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 14px; }
+    .node-table { width: 100%; border-collapse: collapse; font-size: 14px; }
     .node-table th, .node-table td { padding: 12px; text-align: left; border-bottom: 1px solid var(--panel-border); }
     .node-table th { font-family: 'Chakra Petch', sans-serif; color: var(--text-muted); text-transform: uppercase; font-size: 12px; }
-    .node-table tr:hover { background: rgba(255,255,255,0.02); }
 
     /* Recycler Component Grid */
-    .recycler-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-      gap: 16px;
-    }
-
-    .comp-card {
-      background: #08090b;
-      border: 1px solid var(--panel-border);
-      padding: 16px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      transition: border-color 0.2s;
-    }
-
-    .comp-card:hover { border-color: rgba(255, 68, 0, 0.5); }
-
-    .comp-header {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 12px;
-    }
-
-    .comp-icon { font-size: 24px; }
-    .comp-name { font-family: 'Chakra Petch', sans-serif; font-weight: 700; font-size: 15px; color: #fff; }
+    .recycler-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
+    .comp-card { background: #08090b; border: 1px solid var(--panel-border); padding: 14px; display: flex; flex-direction: column; justify-content: space-between; }
+    .comp-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+    .comp-icon { font-size: 22px; }
+    .comp-name { font-family: 'Chakra Petch', sans-serif; font-weight: 700; font-size: 14px; color: #fff; }
     .comp-yield { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
-
-    .comp-ctrls {
-      display: flex;
-      gap: 8px;
-      align-items: center;
-    }
-
-    .btn-qty {
-      background: var(--card-bg);
-      border: 1px solid var(--panel-border);
-      color: #fff;
-      width: 36px;
-      height: 36px;
-      font-weight: 700;
-      cursor: pointer;
-      font-size: 16px;
-    }
-
+    .comp-ctrls { display: flex; gap: 6px; align-items: center; }
+    .btn-qty { background: var(--card-bg); border: 1px solid var(--panel-border); color: #fff; width: 32px; height: 32px; font-weight: 700; cursor: pointer; }
     .btn-qty:hover { border-color: var(--rust-orange); color: var(--rust-orange); }
 
-    /* Tech Tree Styles */
-    .wb-selector {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 20px;
+    /* VISUAL GRAPH TECH TREE STYLING */
+    .techtree-layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      min-height: 650px;
+    }
+    @media (min-width: 950px) {
+      .techtree-layout { grid-template-columns: 1fr 320px; }
     }
 
-    .wb-btn {
-      flex: 1;
+    .tree-canvas-panel {
       background: #08090b;
       border: 1px solid var(--panel-border);
+      position: relative;
+      overflow: auto;
+      min-height: 620px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .wb-tabs-bar {
+      display: flex;
+      gap: 1px;
+      background: var(--panel-border);
+      border-bottom: 1px solid var(--panel-border);
+    }
+
+    .wb-tab {
+      background: var(--card-bg);
       color: var(--text-muted);
-      padding: 14px;
+      border: none;
+      padding: 12px 18px;
       font-family: 'Chakra Petch', sans-serif;
       font-weight: 700;
-      cursor: pointer;
-      text-align: center;
+      font-size: 12px;
       text-transform: uppercase;
-      font-size: 14px;
+      cursor: pointer;
     }
 
-    .wb-btn.active {
-      border-color: var(--rust-orange);
-      color: #fff;
-      background: rgba(255, 68, 0, 0.1);
-    }
-
-    .tree-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 16px;
-    }
-
-    .tree-node {
+    .wb-tab.active {
       background: #08090b;
-      border: 1px solid var(--panel-border);
-      padding: 16px;
+      color: var(--rust-orange);
+      border-bottom: 2px solid var(--rust-orange);
+    }
+
+    .tree-viewport {
+      position: relative;
+      flex: 1;
+      padding: 40px;
+      min-width: 700px;
+      min-height: 800px;
+    }
+
+    .svg-connectors {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .tree-level-row {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin-bottom: 60px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .node-card {
+      width: 64px;
+      height: 64px;
+      background: var(--card-bg);
+      border: 2px solid var(--panel-border);
+      border-radius: 4px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       cursor: pointer;
       position: relative;
       transition: all 0.2s;
     }
 
-    .tree-node:hover { border-color: var(--text-muted); }
-    .tree-node.selected {
-      border-color: var(--rust-orange);
-      background: rgba(255, 68, 0, 0.08);
-      box-shadow: 0 0 15px rgba(255, 68, 0, 0.15);
-    }
+    .node-card:hover { border-color: var(--text-muted); transform: translateY(-2px); }
+    .node-card.active-path { border-color: var(--rust-orange); background: rgba(255, 68, 0, 0.15); box-shadow: 0 0 12px var(--rust-glow); }
+    .node-card.selected-target { border-color: #fff; background: var(--rust-orange); }
 
-    .tree-node .node-cat {
-      font-size: 10px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: var(--rust-orange);
-      font-weight: 700;
-    }
-
-    .tree-node .node-title {
-      font-family: 'Chakra Petch', sans-serif;
-      font-size: 16px;
-      font-weight: 700;
-      color: #fff;
-      margin: 6px 0;
-    }
-
-    .tree-node .node-cost {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 13px;
-      color: var(--scrap);
-    }
-
-    .tree-node .req-tag {
-      font-size: 11px;
-      color: var(--text-muted);
-      margin-top: 8px;
-      border-top: 1px dashed var(--panel-border);
-      padding-top: 6px;
-    }
-
-    .badge-selected {
+    .node-card .icon { font-size: 24px; }
+    .node-card .badge-cost {
       position: absolute;
-      top: 10px;
-      right: 10px;
-      background: var(--rust-orange);
-      color: #fff;
-      font-size: 10px;
+      bottom: -10px;
+      background: #000;
+      border: 1px solid var(--panel-border);
+      color: var(--scrap);
+      font-size: 9px;
+      font-family: 'JetBrains Mono', monospace;
+      padding: 1px 4px;
+      border-radius: 2px;
       font-weight: 700;
-      padding: 2px 6px;
-      text-transform: uppercase;
     }
+
+    /* Details Panel (Right Sidebar) */
+    .details-panel {
+      background: var(--card-bg);
+      border: 1px solid var(--panel-border);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .item-preview {
+      text-align: center;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--panel-border);
+    }
+
+    .item-preview-icon { font-size: 56px; margin-bottom: 12px; }
+    .item-preview-title { font-family: 'Chakra Petch', sans-serif; font-size: 20px; font-weight: 700; color: #fff; }
+    .item-preview-desc { font-size: 12px; color: var(--text-muted); margin-top: 8px; line-height: 1.5; }
+
+    .cost-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .cost-card {
+      background: #08090b;
+      border: 1px solid var(--panel-border);
+      padding: 12px;
+      text-align: center;
+    }
+
+    .cost-card label { font-size: 10px; color: var(--text-muted); margin-bottom: 4px; }
+    .cost-card .val { font-family: 'JetBrains Mono', monospace; font-size: 18px; font-weight: 700; color: var(--scrap); }
+
+    .btn-reset-tree {
+      background: transparent;
+      border: 1px solid var(--panel-border);
+      color: var(--text-muted);
+      padding: 10px;
+      font-family: 'Chakra Petch', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      width: 100%;
+      text-transform: uppercase;
+      margin-top: 20px;
+    }
+
+    .btn-reset-tree:hover { border-color: #ef4444; color: #ef4444; }
   </style>
 </head>
 <body>
@@ -491,36 +518,55 @@
       </div>
     </div>
 
-    <!-- TAB 4: INTERACTIVE TECH TREE -->
+    <!-- TAB 4: VISUAL GRAPH TECH TREE -->
     <div id="techTreeTab" class="tab-content">
-      <div class="wb-selector">
-        <button class="wb-btn active" onclick="switchWbTier('t1', this)">Workbench Tier 1</button>
-        <button class="wb-btn" onclick="switchWbTier('t2', this)">Workbench Tier 2</button>
-        <button class="wb-btn" onclick="switchWbTier('t3', this)">Workbench Tier 3</button>
-      </div>
+      <div class="techtree-layout">
+        
+        <div class="tree-canvas-panel">
+          <div class="wb-tabs-bar">
+            <button class="wb-tab active" onclick="switchWbTier('t1', this)">Workbench Tier 1</button>
+            <button class="wb-tab" onclick="switchWbTier('t2', this)">Workbench Tier 2</button>
+            <button class="wb-tab" onclick="switchWbTier('t3', this)">Workbench Tier 3</button>
+          </div>
 
-      <div class="resource-row">
-        <div class="res-box scrap"><label>Total Scrap Required</label><div class="val" id="treeTotalScrap">0</div></div>
-        <div class="res-box hqm"><label>Items Selected</label><div class="val" id="treeItemCount">0</div></div>
-        <div class="res-box metal"><label>Workbench Craft Cost</label><div class="val" id="treeWbCost" style="font-size:14px; margin-top:10px;">-</div></div>
-      </div>
-
-      <div class="panel">
-        <div class="panel-title">
-          <span id="wbTreeTitle">Workbench Tier 1 Engineering Path</span>
-          <button style="background:none; border:none; color:#ef4444; cursor:pointer; font-size:11px;" onclick="clearTechSelection()">[ CLEAR SELECTIONS ]</button>
+          <div class="tree-viewport" id="treeViewport">
+            <svg class="svg-connectors" id="svgConnectors"></svg>
+            <div id="treeLevelsContainer">
+              <!-- Dynamically Populated Visual Node Levels -->
+            </div>
+          </div>
         </div>
 
-        <div class="tree-grid" id="treeGrid">
-          <!-- Dynamically Populated -->
+        <div class="details-panel">
+          <div>
+            <div class="item-preview">
+              <div class="item-preview-icon" id="previewIcon">🔬</div>
+              <div class="item-preview-title" id="previewTitle">Select an Item</div>
+              <div class="item-preview-desc" id="previewDesc">Click on any node in the tech tree to inspect its research cost and trace the total path cost from the root.</div>
+            </div>
+
+            <div class="cost-grid">
+              <div class="cost-card">
+                <label>RESEARCH COST</label>
+                <div class="val" id="valResearchCost">x0</div>
+              </div>
+              <div class="cost-card">
+                <label>TOTAL PATH COST</label>
+                <div class="val" id="valPathCost">x0</div>
+              </div>
+            </div>
+          </div>
+
+          <button class="btn-reset-tree" onclick="resetTechSelection()">Reset Tech Selection</button>
         </div>
+
       </div>
     </div>
 
   </div>
 
   <script>
-    // Tab Switching Logic
+    // Tab Navigation Logic
     function switchTab(tabId, btn) {
       document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
       document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
@@ -530,7 +576,7 @@
 
       if(tabId === 'nodeTab') updateNodeYields();
       if(tabId === 'recyclerTab') renderRecycler();
-      if(tabId === 'techTreeTab') renderTechTree();
+      if(tabId === 'techTreeTab') renderVisualTree();
     }
 
     // ==========================================
@@ -737,7 +783,7 @@
             <div class="comp-icon">${item.icon}</div>
             <div>
               <div class="comp-name">${item.name}</div>
-              <div class="comp-yield">Yield: ${yieldText}</div>
+              <div class="comp-yield">${yieldText}</div>
             </div>
           </div>
           <div class="comp-ctrls">
@@ -787,134 +833,228 @@
     }
 
     // ==========================================
-    // 4. TECH TREE CALCULATOR LOGIC
+    // 4. VISUAL GRAPH TECH TREE LOGIC
     // ==========================================
-    const TECH_TREES = {
+    const VISUAL_TREES = {
       t1: {
-        title: "Tier 1 Workbench (Engineering & Starter)",
-        wbCost: "50 Scrap + 500 Wood + 100 Metal",
-        items: [
-          { id: 't1_ladder', name: 'Wooden Ladder', scrap: 125, cat: 'Utility', req: [] },
-          { id: 't1_revolver', name: 'Revolver', scrap: 75, cat: 'Weapons', req: [] },
-          { id: 't1_ammo', name: 'Pistol Bullet', scrap: 75, cat: 'Ammo', req: ['t1_revolver'] },
-          { id: 't1_pipe', name: 'Waterpipe Shotgun', scrap: 75, cat: 'Weapons', req: [] },
-          { id: 't1_eoka', name: 'Eoka Pistol', scrap: 20, cat: 'Weapons', req: [] },
-          { id: 't1_firearrow', name: 'Fire Arrow', scrap: 75, cat: 'Ammo', req: [] },
-          { id: 't1_stash', name: 'Small Stash', scrap: 20, cat: 'Storage', req: [] },
-          { id: 't1_mixing', name: 'Mixing Table', scrap: 75, cat: 'Utility', req: [] },
-          { id: 't1_barricade', name: 'Wooden Barricade', scrap: 20, cat: 'Defense', req: [] }
+        levels: [
+          [
+            { id: 't1_root', name: 'Building Plan', icon: '📝', cost: 0, desc: 'Foundation requirement for Tier 1 crafting tree.' }
+          ],
+          [
+            { id: 't1_wooddoor', name: 'Wooden Door', icon: '🚪', cost: 20, parent: 't1_root', desc: 'Basic wooden entry door.' },
+            { id: 't1_revolver', name: 'Revolver', icon: '🔫', cost: 75, parent: 't1_root', desc: 'A basic 8-shot reliable handgun.' },
+            { id: 't1_eoka', name: 'Eoka Pistol', icon: '💥', cost: 20, parent: 't1_root', desc: 'Flintlock pistol. Highly unreliable.' }
+          ],
+          [
+            { id: 't1_keylock', name: 'Key Lock', icon: '🔒', cost: 20, parent: 't1_wooddoor', desc: 'Basic door lock requiring no key for the owner.' },
+            { id: 't1_pammo', name: 'Pistol Bullet', icon: '⚡', cost: 75, parent: 't1_revolver', desc: 'Standard 9mm ammunition.' },
+            { id: 't1_waterpipe', name: 'Waterpipe Shotgun', icon: '🥖', cost: 75, parent: 't1_eoka', desc: 'Single shot break-action shotgun.' }
+          ],
+          [
+            { id: 't1_ladder', name: 'Wooden Ladder', icon: '🪜', cost: 125, parent: 't1_keylock', desc: 'Can be placed on structure walls to climb.' },
+            { id: 't1_db', name: 'Double Barrel Shotgun', icon: '💥', cost: 125, parent: 't1_waterpipe', desc: 'Two shot close range lethal shotgun.' }
+          ]
         ]
       },
       t2: {
-        title: "Tier 2 Workbench (Main Progression)",
-        wbCost: "500 Scrap + 20 HQM + 500 Metal",
-        items: [
-          { id: 't2_syringe', name: 'Medical Syringe', scrap: 75, cat: 'Medical', req: [] },
-          { id: 't2_medkit', name: 'Large Medkit', scrap: 125, cat: 'Medical', req: ['t2_syringe'] },
-          { id: 't2_garagedoor', name: 'Garage Door', scrap: 75, cat: 'Building', req: [] },
-          { id: 't2_tommy', name: 'Thompson SMG', scrap: 125, cat: 'Weapons', req: [] },
-          { id: 't2_custom', name: 'Custom SMG', scrap: 125, cat: 'Weapons', req: [] },
-          { id: 't2_sar', name: 'Semi-Automatic Rifle', scrap: 125, cat: 'Weapons', req: [] },
-          { id: 't2_556', name: '5.56 Ammo', scrap: 125, cat: 'Ammo', req: ['t2_sar'] },
-          { id: 't2_beancan', name: 'Beancan Grenade', scrap: 75, cat: 'Explosives', req: [] },
-          { id: 't2_satchel', name: 'Satchel Charge', scrap: 125, cat: 'Explosives', req: ['t2_beancan'] },
-          { id: 't2_expammo', name: 'Explosive Ammo', scrap: 125, cat: 'Explosives', req: ['t2_556'] }
+        levels: [
+          [
+            { id: 't2_root', name: 'Workbench T2', icon: '⚙️', cost: 0, desc: 'Tier 2 Engineering Hub.' }
+          ],
+          [
+            { id: 't2_garage', name: 'Garage Door', icon: '🚪', cost: 75, parent: 't2_root', desc: 'Roll-up metal garage door.' },
+            { id: 't2_tommy', name: 'Thompson SMG', icon: '🔫', cost: 125, parent: 't2_root', desc: 'Rapid fire submachine gun.' },
+            { id: 't2_beancan', name: 'Beancan Grenade', icon: '🥫', cost: 75, parent: 't2_root', desc: 'An unreliable explosive grenade.' }
+          ],
+          [
+            { id: 't2_sar', name: 'Semi-Auto Rifle', icon: '🎯', cost: 125, parent: 't2_tommy', desc: 'Mid-range rifle firing 5.56 rounds.' },
+            { id: 't2_satchel', name: 'Satchel Charge', icon: '🎒', cost: 125, parent: 't2_beancan', desc: 'A crude explosive pack used for raiding.' }
+          ],
+          [
+            { id: 't2_556', name: '5.56 Rifle Ammo', icon: '⚡', cost: 125, parent: 't2_sar', desc: 'High velocity rifle ammunition.' }
+          ],
+          [
+            { id: 't2_expammo', name: 'Explosive Ammo', icon: '💥', cost: 125, parent: 't2_556', desc: 'Explosive tipped 5.56 ammo.' }
+          ]
         ]
       },
       t3: {
-        title: "Tier 3 Workbench (Endgame)",
-        wbCost: "1,250 Scrap + 100 HQM + 1,000 Metal",
-        items: [
-          { id: 't3_ak', name: 'Assault Rifle (AK-47)', scrap: 500, cat: 'Weapons', req: [] },
-          { id: 't3_bolt', name: 'Bolt Action Rifle', scrap: 500, cat: 'Weapons', req: [] },
-          { id: 't3_facemask', name: 'Metal Facemask', scrap: 500, cat: 'Armor', req: [] },
-          { id: 't3_chestplate', name: 'Metal Chestplate', scrap: 500, cat: 'Armor', req: ['t3_facemask'] },
-          { id: 't3_launcher', name: 'Rocket Launcher', scrap: 500, cat: 'Explosives', req: [] },
-          { id: 't3_rocket', name: 'Rocket', scrap: 500, cat: 'Explosives', req: ['t3_launcher'] },
-          { id: 't3_c4', name: 'Timed Explosive Charge (C4)', scrap: 500, cat: 'Explosives', req: ['t3_rocket'] },
-          { id: 't3_hvrocket', name: 'HV Rocket', scrap: 500, cat: 'Explosives', req: ['t3_launcher'] }
+        levels: [
+          [
+            { id: 't3_root', name: 'Workbench T3', icon: '🔬', cost: 0, desc: 'High Tech Engineering Base.' }
+          ],
+          [
+            { id: 't3_ak', name: 'Assault Rifle (AK)', icon: '🔫', cost: 500, parent: 't3_root', desc: 'High damage iconic automatic rifle.' },
+            { id: 't3_facemask', name: 'Metal Facemask', icon: '🪖', cost: 500, parent: 't3_root', desc: 'Heavy armored head protection.' },
+            { id: 't3_launcher', name: 'Rocket Launcher', icon: '🚀', cost: 500, parent: 't3_root', desc: 'Shoulder-fired rocket launcher.' }
+          ],
+          [
+            { id: 't3_bolt', name: 'Bolt Action Rifle', icon: '🔭', cost: 500, parent: 't3_ak', desc: 'Long range precision sniper rifle.' },
+            { id: 't3_chest', name: 'Metal Chestplate', icon: '🛡️', cost: 500, parent: 't3_facemask', desc: 'Heavy chest armor.' },
+            { id: 't3_rocket', name: 'Rocket', icon: '💥', cost: 500, parent: 't3_launcher', desc: 'Explosive payload rocket.' }
+          ],
+          [
+            { id: 't3_c4', name: 'Timed C4 Explosive', icon: '💣', cost: 500, parent: 't3_rocket', desc: 'High-yield timed explosive charge.' }
+          ]
         ]
       }
     };
 
-    let activeTier = 't1';
-    let selectedTechNodes = new Set();
+    let activeWbTier = 't1';
+    let selectedNodeId = null;
 
-    function switchWbTier(tier, btn) {
-      document.querySelectorAll('.wb-btn').forEach(b => b.classList.remove('active'));
+    function switchWbTier(tierKey, btn) {
+      document.querySelectorAll('.wb-tab').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      activeTier = tier;
-      renderTechTree();
+      activeWbTier = tierKey;
+      selectedNodeId = null;
+      renderVisualTree();
     }
 
-    function toggleTechNode(itemId) {
-      if (selectedTechNodes.has(itemId)) {
-        selectedTechNodes.delete(itemId);
-      } else {
-        selectedTechNodes.add(itemId);
-        // Auto-select prerequisites
-        autoSelectReqs(itemId);
-      }
-      renderTechTree();
-    }
+    function renderVisualTree() {
+      const treeData = VISUAL_TREES[activeWbTier];
+      const container = document.getElementById('treeLevelsContainer');
+      container.innerHTML = '';
 
-    function autoSelectReqs(itemId) {
-      const tierData = TECH_TREES[activeTier];
-      const item = tierData.items.find(i => i.id === itemId);
-      if (item && item.req) {
-        item.req.forEach(reqId => {
-          selectedTechNodes.add(reqId);
-          autoSelectReqs(reqId);
+      // Build Visual Level Rows
+      treeData.levels.forEach((levelNodes) => {
+        const row = document.createElement('div');
+        row.className = 'tree-level-row';
+
+        levelNodes.forEach((node) => {
+          const card = document.createElement('div');
+          card.className = `node-card ${selectedNodeId === node.id ? 'selected-target' : ''}`;
+          card.id = `node-${node.id}`;
+          card.onclick = (e) => { e.stopPropagation(); selectTechNode(node.id); };
+
+          card.innerHTML = `
+            <div class="icon">${node.icon}</div>
+            <div class="badge-cost">x${node.cost}</div>
+          `;
+          row.appendChild(card);
         });
-      }
-    }
 
-    function clearTechSelection() {
-      selectedTechNodes.clear();
-      renderTechTree();
-    }
-
-    function renderTechTree() {
-      const tierData = TECH_TREES[activeTier];
-      document.getElementById('wbTreeTitle').innerText = tierData.title;
-      document.getElementById('treeWbCost').innerText = tierData.wbCost;
-
-      const grid = document.getElementById('treeGrid');
-      grid.innerHTML = '';
-
-      let totalScrap = 0;
-      let count = 0;
-
-      tierData.items.forEach(item => {
-        const isSelected = selectedTechNodes.has(item.id);
-        if (isSelected) {
-          totalScrap += item.scrap;
-          count++;
-        }
-
-        const node = document.createElement('div');
-        node.className = `tree-node ${isSelected ? 'selected' : ''}`;
-        node.onclick = () => toggleTechNode(item.id);
-
-        const reqNames = item.req.map(rId => {
-          const reqItem = tierData.items.find(i => i.id === rId);
-          return reqItem ? reqItem.name : rId;
-        }).join(', ');
-
-        node.innerHTML = `
-          ${isSelected ? '<span class="badge-selected">Selected</span>' : ''}
-          <div class="node-cat">${item.cat}</div>
-          <div class="node-title">${item.name}</div>
-          <div class="node-cost">${item.scrap} Scrap</div>
-          ${reqNames ? `<div class="req-tag">Requires: ${reqNames}</div>` : ''}
-        `;
-
-        grid.appendChild(node);
+        container.appendChild(row);
       });
 
-      document.getElementById('treeTotalScrap').innerText = totalScrap.toLocaleString();
-      document.getElementById('treeItemCount').innerText = count.toLocaleString();
+      // Allow DOM rendering time then draw SVGs and recalculate pathing
+      setTimeout(() => {
+        highlightActivePath();
+        drawConnectors();
+      }, 30);
     }
+
+    function selectTechNode(nodeId) {
+      selectedNodeId = nodeId;
+      highlightActivePath();
+      drawConnectors();
+      updateDetailsPanel();
+    }
+
+    function resetTechSelection() {
+      selectedNodeId = null;
+      highlightActivePath();
+      drawConnectors();
+      
+      document.getElementById('previewIcon').innerText = '🔬';
+      document.getElementById('previewTitle').innerText = 'Select an Item';
+      document.getElementById('previewDesc').innerText = 'Click on any node in the tech tree to inspect its research cost and trace the total path cost from the root.';
+      document.getElementById('valResearchCost').innerText = 'x0';
+      document.getElementById('valPathCost').innerText = 'x0';
+    }
+
+    function getPathToNode(targetId) {
+      if (!targetId) return [];
+      const treeData = VISUAL_TREES[activeWbTier];
+      const allNodes = treeData.levels.flat();
+
+      let path = [];
+      let curr = allNodes.find(n => n.id === targetId);
+
+      while (curr) {
+        path.push(curr);
+        if (!curr.parent) break;
+        curr = allNodes.find(n => n.id === curr.parent);
+      }
+      return path;
+    }
+
+    function highlightActivePath() {
+      document.querySelectorAll('.node-card').forEach(c => c.classList.remove('active-path', 'selected-target'));
+      if (!selectedNodeId) return;
+
+      const activeNodes = getPathToNode(selectedNodeId);
+      activeNodes.forEach(node => {
+        const el = document.getElementById(`node-${node.id}`);
+        if (el) {
+          if (node.id === selectedNodeId) el.classList.add('selected-target');
+          else el.classList.add('active-path');
+        }
+      });
+    }
+
+    function updateDetailsPanel() {
+      if (!selectedNodeId) return;
+      const treeData = VISUAL_TREES[activeWbTier];
+      const allNodes = treeData.levels.flat();
+      const item = allNodes.find(n => n.id === selectedNodeId);
+
+      const activePath = getPathToNode(selectedNodeId);
+      const totalPathCost = activePath.reduce((acc, curr) => acc + curr.cost, 0);
+
+      document.getElementById('previewIcon').innerText = item.icon;
+      document.getElementById('previewTitle').innerText = item.name;
+      document.getElementById('previewDesc').innerText = item.desc;
+      document.getElementById('valResearchCost').innerText = `x${item.cost}`;
+      document.getElementById('valPathCost').innerText = `x${totalPathCost}`;
+    }
+
+    function drawConnectors() {
+      const svg = document.getElementById('svgConnectors');
+      const viewport = document.getElementById('treeViewport');
+      const vpRect = viewport.getBoundingClientRect();
+
+      svg.setAttribute('width', viewport.scrollWidth);
+      svg.setAttribute('height', viewport.scrollHeight);
+      svg.innerHTML = '';
+
+      const treeData = VISUAL_TREES[activeWbTier];
+      const allNodes = treeData.levels.flat();
+      const activePathIds = getPathToNode(selectedNodeId).map(n => n.id);
+
+      allNodes.forEach(node => {
+        if (!node.parent) return;
+
+        const childEl = document.getElementById(`node-${node.id}`);
+        const parentEl = document.getElementById(`node-${node.parent}`);
+
+        if (childEl && parentEl) {
+          const cRect = childEl.getBoundingClientRect();
+          const pRect = parentEl.getBoundingClientRect();
+
+          const x1 = pRect.left + pRect.width / 2 - vpRect.left;
+          const y1 = pRect.bottom - vpRect.top;
+          const x2 = cRect.left + cRect.width / 2 - vpRect.left;
+          const y2 = cRect.top - vpRect.top;
+
+          const isActiveLine = activePathIds.includes(node.id) && activePathIds.includes(node.parent);
+
+          const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+          const midY = y1 + (y2 - y1) / 2;
+          const d = `M ${x1} ${y1} C ${x1} ${midY}, ${x2} ${midY}, ${x2} ${y2}`;
+
+          path.setAttribute('d', d);
+          path.setAttribute('fill', 'none');
+          path.setAttribute('stroke', isActiveLine ? '#ff4400' : '#232732');
+          path.setAttribute('stroke-width', isActiveLine ? '3' : '2');
+
+          svg.appendChild(path);
+        }
+      });
+    }
+
+    window.addEventListener('resize', drawConnectors);
   </script>
 </body>
 </html>
