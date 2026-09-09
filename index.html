@@ -3,322 +3,402 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rust Raid Calculator</title>
-  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <title>Toerick BOOM Calculator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,500;0,700;1,700&family=JetBrains+Mono:wght@500;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-dark: #121317;
-      --card-bg: #1a1c23;
-      --card-border: #2a2d38;
-      --rust-accent: #cd412b;
-      --rust-hover: #e04a32;
-      --text-main: #f0f2f5;
-      --text-muted: #8c93a4;
-      --sulfur-yellow: #f1c40f;
-      --charcoal-gray: #95a5a6;
-      --lgf-red: #e74c3c;
+      --bg-dark: #0a0b0d;
+      --card-bg: #111318;
+      --panel-border: #232732;
+      --rust-orange: #ff4400;
+      --rust-glow: rgba(255, 68, 0, 0.25);
+      --text-main: #f1f5f9;
+      --text-muted: #64748b;
+      --sulfur: #facc15;
+      --charcoal: #94a3b8;
+      --gp: #f97316;
+      --lgf: #ef4444;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
+
     body {
       background-color: var(--bg-dark);
+      background-image: 
+        radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(10, 11, 13, 0.8), rgba(10, 11, 13, 1));
+      background-size: 24px 24px, 100% 100%;
       color: var(--text-main);
       font-family: 'Inter', sans-serif;
-      padding: 24px;
+      padding: 32px 16px;
       min-height: 100vh;
     }
 
+    .wrapper {
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+
+    /* Top Navigation / Header */
     header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 24px;
+      background: var(--card-bg);
+      border: 1px solid var(--panel-border);
+      border-left: 4px solid var(--rust-orange);
+      margin-bottom: 24px;
+      box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
+    }
+
+    .brand {
       display: flex;
       align-items: center;
       gap: 12px;
-      margin-bottom: 28px;
-      border-bottom: 2px solid var(--card-border);
-      padding-bottom: 16px;
     }
 
-    header h1 {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 32px;
+    .brand h1 {
+      font-family: 'Chakra Petch', sans-serif;
+      font-size: 28px;
       font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: #fff;
+    }
+
+    .brand h1 span {
+      color: var(--rust-orange);
+      text-shadow: 0 0 12px var(--rust-glow);
+    }
+
+    .status-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      background: rgba(255, 68, 0, 0.1);
+      color: var(--rust-orange);
+      border: 1px solid rgba(255, 68, 0, 0.3);
+      padding: 4px 10px;
       text-transform: uppercase;
       letter-spacing: 1px;
     }
 
-    .badge {
-      background: var(--rust-accent);
-      color: #fff;
-      padding: 4px 10px;
-      border-radius: 4px;
-      font-size: 12px;
-      font-weight: 700;
-      text-transform: uppercase;
-    }
-
-    .container {
+    /* Main Grid */
+    .grid {
       display: grid;
       grid-template-columns: 1fr;
       gap: 24px;
-      max-width: 1200px;
-      margin: 0 auto;
     }
 
-    @media (min-width: 850px) {
-      .container { grid-template-columns: 400px 1fr; }
+    @media (min-width: 900px) {
+      .grid { grid-template-columns: 380px 1fr; }
     }
 
-    .card {
+    /* Panels */
+    .panel {
       background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 8px;
-      padding: 20px;
+      border: 1px solid var(--panel-border);
+      padding: 24px;
+      position: relative;
     }
 
-    .card-title {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 20px;
+    .panel-title {
+      font-family: 'Chakra Petch', sans-serif;
+      font-size: 16px;
       font-weight: 700;
       text-transform: uppercase;
-      margin-bottom: 16px;
-      color: var(--text-main);
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      margin-bottom: 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      border-bottom: 1px solid var(--panel-border);
+      padding-bottom: 10px;
     }
 
+    /* Form Controls */
     .form-group {
-      margin-bottom: 16px;
+      margin-bottom: 18px;
     }
 
     label {
       display: block;
-      font-size: 13px;
-      font-weight: 600;
+      font-size: 11px;
+      font-weight: 700;
       color: var(--text-muted);
-      margin-bottom: 6px;
       text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
     }
 
     select, input {
       width: 100%;
-      background: #121317;
-      border: 1px solid var(--card-border);
-      color: var(--text-main);
-      padding: 10px 12px;
-      border-radius: 6px;
+      background: #08090b;
+      border: 1px solid var(--panel-border);
+      color: #fff;
+      padding: 12px 14px;
+      font-family: 'Inter', sans-serif;
       font-size: 14px;
+      border-radius: 0;
       outline: none;
+      transition: all 0.2s;
     }
 
     select:focus, input:focus {
-      border-color: var(--rust-accent);
+      border-color: var(--rust-orange);
+      box-shadow: 0 0 10px var(--rust-glow);
     }
 
-    .btn {
+    .btn-action {
       width: 100%;
-      background: var(--rust-accent);
-      color: white;
+      background: var(--rust-orange);
+      color: #fff;
       border: none;
-      padding: 12px;
-      border-radius: 6px;
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 16px;
+      padding: 14px;
+      font-family: 'Chakra Petch', sans-serif;
+      font-font-size: 16px;
       font-weight: 700;
       text-transform: uppercase;
+      letter-spacing: 1.5px;
       cursor: pointer;
-      transition: background 0.2s;
+      transition: all 0.2s;
+      margin-top: 8px;
+      clip-path: polygon(0 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%);
     }
 
-    .btn:hover { background: var(--rust-hover); }
+    .btn-action:hover {
+      background: #ff5511;
+      box-shadow: 0 0 20px var(--rust-glow);
+      transform: translateY(-1px);
+    }
 
-    /* Resource Display Grid */
-    .resource-grid {
+    /* Resource Display Cards */
+    .resource-row {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 12px;
-      margin-bottom: 20px;
+      margin-bottom: 24px;
     }
 
-    @media (min-width: 600px) {
-      .resource-grid { grid-template-columns: repeat(4, 1fr); }
+    @media (min-width: 650px) {
+      .resource-row { grid-template-columns: repeat(4, 1fr); }
     }
 
-    .res-card {
-      background: #121317;
-      border: 1px solid var(--card-border);
-      padding: 14px;
-      border-radius: 6px;
-      text-align: center;
+    .res-box {
+      background: #08090b;
+      border: 1px solid var(--panel-border);
+      padding: 16px;
+      position: relative;
     }
 
-    .res-card .amount {
-      font-family: 'Rajdhani', sans-serif;
+    .res-box::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 2px;
+    }
+
+    .res-box.sulfur::before { background: var(--sulfur); }
+    .res-box.charcoal::before { background: var(--charcoal); }
+    .res-box.gp::before { background: var(--gp); }
+    .res-box.lgf::before { background: var(--lgf); }
+
+    .res-box .val {
+      font-family: 'JetBrains Mono', monospace;
       font-size: 24px;
       font-weight: 700;
-      margin-top: 4px;
+      margin-top: 6px;
     }
 
-    .res-sulfur { color: var(--sulfur-yellow); }
-    .res-charcoal { color: var(--charcoal-gray); }
-    .res-gp { color: #e67e22; }
-    .res-lgf { color: var(--lgf-red); }
+    .res-box.sulfur .val { color: var(--sulfur); }
+    .res-box.charcoal .val { color: var(--charcoal); }
+    .res-box.gp .val { color: var(--gp); }
+    .res-box.lgf .val { color: var(--lgf); }
 
-    /* Queue Table */
+    /* Queue Output */
     .queue-list {
       list-style: none;
-      margin-bottom: 16px;
+      margin-bottom: 20px;
     }
 
     .queue-item {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: #121317;
-      border: 1px solid var(--card-border);
-      padding: 12px;
-      border-radius: 6px;
-      margin-bottom: 8px;
+      background: #08090b;
+      border: 1px solid var(--panel-border);
+      border-left: 3px solid var(--rust-orange);
+      padding: 14px 16px;
+      margin-bottom: 10px;
     }
 
-    .queue-info strong {
+    .queue-item-info strong {
+      font-family: 'Chakra Petch', sans-serif;
+      font-size: 16px;
+      color: #fff;
+    }
+
+    .queue-item-info span {
       display: block;
-      font-size: 14px;
-    }
-
-    .queue-info span {
       font-size: 12px;
       color: var(--text-muted);
+      margin-top: 2px;
     }
 
-    .delete-btn {
+    .btn-del {
       background: transparent;
       border: none;
-      color: #e74c3c;
-      font-weight: bold;
+      color: #ef4444;
       cursor: pointer;
+      font-size: 18px;
       padding: 4px 8px;
-      font-size: 16px;
+      transition: color 0.2s;
     }
+
+    .btn-del:hover { color: #ff6666; }
 
     .empty-state {
-      color: var(--text-muted);
-      font-size: 14px;
       text-align: center;
-      padding: 20px 0;
+      color: var(--text-muted);
+      font-size: 13px;
+      padding: 32px 0;
+      font-family: 'JetBrains Mono', monospace;
     }
 
-    .explosive-badge-list {
+    /* Explosives Summary Pills */
+    .exp-pills {
       display: flex;
-      gap: 8px;
+      gap: 10px;
       flex-wrap: wrap;
       margin-top: 12px;
     }
 
-    .exp-pill {
-      background: #252834;
-      border: 1px solid var(--card-border);
-      padding: 6px 12px;
-      border-radius: 20px;
+    .pill {
+      background: #08090b;
+      border: 1px solid var(--panel-border);
+      padding: 8px 14px;
+      font-family: 'JetBrains Mono', monospace;
       font-size: 13px;
+      color: #fff;
     }
+
+    .pill strong {
+      color: var(--rust-orange);
+      margin-right: 4px;
+    }
+
+    .clear-btn {
+      background: none;
+      border: none;
+      color: #ef4444;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      cursor: pointer;
+      letter-spacing: 1px;
+    }
+
+    .clear-btn:hover { text-decoration: underline; }
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>Rust Raid Calculator</h1>
-    <span class="badge">Multi-Target Queue</span>
-  </header>
+  <div class="wrapper">
+    <header>
+      <div class="brand">
+        <h1>Toerick <span>BOOM</span> Calculator</h1>
+      </div>
+      <div class="status-badge">Targeting Active</div>
+    </header>
 
-  <div class="container">
-    <!-- LEFT: Target Input Form -->
-    <div class="card">
-      <div class="card-title">Add Target</div>
-      
-      <div class="form-group">
-        <label for="targetSelect">Select Structure / Door</label>
-        <select id="targetSelect">
-          <optgroup label="Doors & Hatches">
-            <option value="woodDoor">Wooden Door</option>
-            <option value="sheetDoor">Sheet Metal Door</option>
-            <option value="garageDoor" selected>Garage Door</option>
-            <option value="armoredDoor">Armored Door</option>
-            <option value="ladderHatch">Ladder Hatch</option>
-          </optgroup>
-          <optgroup label="Building Walls & Floors">
-            <option value="woodWall">Wooden Wall</option>
-            <option value="stoneWall">Stone Wall</option>
-            <option value="metalWall">Sheet Metal Wall</option>
-            <option value="hqmWall">Armored (HQM) Wall</option>
-          </optgroup>
-          <optgroup label="Deployables & High Externals">
-            <option value="highWoodWall">High External Wooden Wall</option>
-            <option value="highStoneWall">High External Stone Wall</option>
-            <option value="tc">Tool Cupboard</option>
-          </optgroup>
-        </select>
+    <div class="grid">
+      <!-- CONFIGURATOR -->
+      <div class="panel">
+        <div class="panel-title">Target Configurator</div>
+
+        <div class="form-group">
+          <label for="targetSelect">Structure / Door</label>
+          <select id="targetSelect">
+            <optgroup label="Doors & Hatches">
+              <option value="woodDoor">Wooden Door</option>
+              <option value="sheetDoor">Sheet Metal Door</option>
+              <option value="garageDoor" selected>Garage Door</option>
+              <option value="armoredDoor">Armored Door</option>
+              <option value="ladderHatch">Ladder Hatch</option>
+            </optgroup>
+            <optgroup label="Building Walls & Floors">
+              <option value="woodWall">Wooden Wall</option>
+              <option value="stoneWall">Stone Wall</option>
+              <option value="metalWall">Sheet Metal Wall</option>
+              <option value="hqmWall">Armored (HQM) Wall</option>
+            </optgroup>
+            <optgroup label="Deployables & High Externals">
+              <option value="highWoodWall">High External Wooden Wall</option>
+              <option value="highStoneWall">High External Stone Wall</option>
+              <option value="tc">Tool Cupboard</option>
+            </optgroup>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="qtyInput">Target Quantity</label>
+          <input type="number" id="qtyInput" value="1" min="1" max="100">
+        </div>
+
+        <div class="form-group">
+          <label for="methodSelect">Method Strategy</label>
+          <select id="methodSelect">
+            <option value="optimal">⚡ Optimal / Cheapest Combo</option>
+            <option value="c4">C4 Only</option>
+            <option value="rocket">Rockets Only</option>
+            <option value="satchel">Satchels Only</option>
+            <option value="expAmmo">Explosive Ammo Only</option>
+          </select>
+        </div>
+
+        <button class="btn-action" onclick="addToQueue()">+ Add Target</button>
       </div>
 
-      <div class="form-group">
-        <label for="qtyInput">Quantity</label>
-        <input type="number" id="qtyInput" value="1" min="1" max="100">
-      </div>
-
-      <div class="form-group">
-        <label for="methodSelect">Raid Method</label>
-        <select id="methodSelect">
-          <option value="optimal">⚡ Optimal / Cheapest Combo</option>
-          <option value="c4">C4 Only</option>
-          <option value="rocket">Rockets Only</option>
-          <option value="satchel">Satchel Charges Only</option>
-          <option value="expAmmo">Explosive Ammo Only</option>
-        </select>
-      </div>
-
-      <button class="btn" onclick="addToQueue()">+ Add To Raid Path</button>
-    </div>
-
-    <!-- RIGHT: Path Summary & Raw Costs -->
-    <div>
-      <div class="resource-grid">
-        <div class="res-card">
-          <label>Total Sulfur</label>
-          <div class="amount res-sulfur" id="totalSulfur">0</div>
-        </div>
-        <div class="res-card">
-          <label>Charcoal</label>
-          <div class="amount res-charcoal" id="totalCharcoal">0</div>
-        </div>
-        <div class="res-card">
-          <label>Gunpowder</label>
-          <div class="amount res-gp" id="totalGP">0</div>
-        </div>
-        <div class="res-card">
-          <label>Low Grade Fuel</label>
-          <div class="amount res-lgf" id="totalLGF">0</div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-title">
-          <span>Raid Path Queue</span>
-          <button style="background:none; border:none; color:var(--rust-accent); cursor:pointer; font-size:12px; font-weight:bold;" onclick="clearQueue()">CLEAR ALL</button>
+      <!-- RAID INTELLIGENCE PANEL -->
+      <div>
+        <div class="resource-row">
+          <div class="res-box sulfur">
+            <label>Total Sulfur</label>
+            <div class="val" id="totalSulfur">0</div>
+          </div>
+          <div class="res-box charcoal">
+            <label>Charcoal</label>
+            <div class="val" id="totalCharcoal">0</div>
+          </div>
+          <div class="res-box gp">
+            <label>Gunpowder</label>
+            <div class="val" id="totalGP">0</div>
+          </div>
+          <div class="res-box lgf">
+            <label>Low Grade Fuel</label>
+            <div class="val" id="totalLGF">0</div>
+          </div>
         </div>
 
-        <ul class="queue-list" id="queueList">
-          <li class="empty-state">No targets added to raid path yet.</li>
-        </ul>
+        <div class="panel">
+          <div class="panel-title">
+            <span>Raid Path Queue</span>
+            <button class="clear-btn" onclick="clearQueue()">[ CLEAR QUEUE ]</button>
+          </div>
 
-        <label>Total Explosives Needed:</label>
-        <div class="explosive-badge-list" id="explosiveBadges">
-          <span class="exp-pill">None</span>
+          <ul class="queue-list" id="queueList">
+            <li class="empty-state">// NO TARGETS ADDED TO RAID PATH</li>
+          </ul>
+
+          <label>Required Explosives Breakdown</label>
+          <div class="exp-pills" id="explosiveBadges">
+            <span class="pill">None</span>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
   <script>
-    // Explosive Crafting Base Costs
     const EXPLOSIVES = {
       c4: { name: 'C4', sulfur: 2200, charcoal: 3000, lgf: 200 },
       rocket: { name: 'Rocket', sulfur: 1400, charcoal: 1950, lgf: 30 },
@@ -326,7 +406,6 @@
       expAmmo: { name: 'Explosive Ammo', sulfur: 25, charcoal: 30, lgf: 0 }
     };
 
-    // Target HP and Damage Specs
     const TARGETS = {
       woodDoor:      { name: 'Wooden Door', hp: 200, damage: { c4: 550, rocket: 220, satchel: 105, expAmmo: 11.2 } },
       sheetDoor:     { name: 'Sheet Metal Door', hp: 250, damage: { c4: 550, rocket: 220, satchel: 70, expAmmo: 4 } },
@@ -344,7 +423,6 @@
 
     let raidQueue = [];
 
-    // Finds the single cheapest combination of explosives for a given target
     function calculateCheapestCombo(targetKey) {
       const target = TARGETS[targetKey];
       let bestCost = Infinity;
@@ -367,7 +445,6 @@
             continue;
           }
 
-          // Satchel top-off
           const satchels = Math.ceil(remHP / target.damage.satchel);
           const satchelCost = (c4 * EXPLOSIVES.c4.sulfur) + (r * EXPLOSIVES.rocket.sulfur) + (satchels * EXPLOSIVES.satchel.sulfur);
           if (satchelCost < bestCost) {
@@ -375,7 +452,6 @@
             bestCounts = { c4, rocket: r, satchel: satchels, expAmmo: 0 };
           }
 
-          // Exp Ammo top-off
           const expAmmo = Math.ceil(remHP / target.damage.expAmmo);
           const expAmmoCost = (c4 * EXPLOSIVES.c4.sulfur) + (r * EXPLOSIVES.rocket.sulfur) + (expAmmo * EXPLOSIVES.expAmmo.sulfur);
           if (expAmmoCost < bestCost) {
@@ -413,7 +489,7 @@
       let totals = { sulfur: 0, charcoal: 0, lgf: 0, c4: 0, rocket: 0, satchel: 0, expAmmo: 0 };
 
       if (raidQueue.length === 0) {
-        queueListEl.innerHTML = `<li class="empty-state">No targets added to raid path yet.</li>`;
+        queueListEl.innerHTML = `<li class="empty-state">// NO TARGETS ADDED TO RAID PATH</li>`;
       } else {
         queueListEl.innerHTML = '';
       }
@@ -430,10 +506,8 @@
           counts[item.method] = countSingle * item.qty;
         }
 
-        // Aggregate explosives
         Object.keys(counts).forEach(k => totals[k] += counts[k]);
 
-        // Calculate item display string
         const expSummary = Object.entries(counts)
           .filter(([_, v]) => v > 0)
           .map(([k, v]) => `${v}x ${EXPLOSIVES[k].name}`)
@@ -442,34 +516,31 @@
         const li = document.createElement('li');
         li.className = 'queue-item';
         li.innerHTML = `
-          <div class="queue-info">
+          <div class="queue-item-info">
             <strong>${item.qty}x ${target.name}</strong>
-            <span>Method: ${item.method.toUpperCase()} (${expSummary})</span>
+            <span>Strategy: ${item.method.toUpperCase()} (${expSummary})</span>
           </div>
-          <button class="delete-btn" onclick="removeFromQueue(${item.id})">✕</button>
+          <button class="btn-del" onclick="removeFromQueue(${item.id})">✕</button>
         `;
         queueListEl.appendChild(li);
       });
 
-      // Calculate Raw Resource Totals
       totals.sulfur = (totals.c4 * EXPLOSIVES.c4.sulfur) + (totals.rocket * EXPLOSIVES.rocket.sulfur) + (totals.satchel * EXPLOSIVES.satchel.sulfur) + (totals.expAmmo * EXPLOSIVES.expAmmo.sulfur);
       totals.charcoal = (totals.c4 * EXPLOSIVES.c4.charcoal) + (totals.rocket * EXPLOSIVES.rocket.charcoal) + (totals.satchel * EXPLOSIVES.satchel.charcoal) + (totals.expAmmo * EXPLOSIVES.expAmmo.charcoal);
       totals.lgf = (totals.c4 * EXPLOSIVES.c4.lgf) + (totals.rocket * EXPLOSIVES.rocket.lgf);
 
-      // Render Totals
       document.getElementById('totalSulfur').innerText = totals.sulfur.toLocaleString();
       document.getElementById('totalCharcoal').innerText = totals.charcoal.toLocaleString();
       document.getElementById('totalGP').innerText = Math.floor(totals.sulfur / 2).toLocaleString();
       document.getElementById('totalLGF').innerText = totals.lgf.toLocaleString();
 
-      // Render Explosive Counts
       const badgeList = Object.entries({ C4: totals.c4, Rockets: totals.rocket, Satchels: totals.satchel, 'Exp Ammo': totals.expAmmo })
         .filter(([_, count]) => count > 0)
-        .map(([name, count]) => `<span class="exp-pill"><strong>${count.toLocaleString()}</strong> ${name}</span>`)
+        .map(([name, count]) => `<span class="pill"><strong>${count.toLocaleString()}</strong> ${name}</span>`)
         .join('');
 
-      explosiveBadgesEl.innerHTML = badgeList || `<span class="exp-pill">None</span>`;
+      explosiveBadgesEl.innerHTML = badgeList || `<span class="pill">None</span>`;
     }
   </script>
 </body>
-</html>
+</html>git add index.html
